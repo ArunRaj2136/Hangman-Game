@@ -36,5 +36,42 @@ function displayWord() {
     popup.style.display = "flex";
   }
 }
-
 displayWord();
+
+//////show notification ////
+function showNotification() {
+  notification.classList.add("show");
+
+  setTimeout(() => notification.classList.remove("show"), 2000);
+}
+
+//////////update wrong letters////
+function updateWrongLettersEl() {
+  console.log("update wrong letter");
+}
+
+////////key down event///////
+window.addEventListener("keydown", function (e) {
+  console.log(e.keyCode); //// alphabets from 65 to 90
+  if (e.keyCode >= 65 && e.keyCode <= 90) {
+    const letter = e.key;
+
+    if (selectedWord.includes(letter)) {
+      if (!correctLetters.includes(letter)) {
+        correctLetters.push(letter);
+
+        displayWord();
+      } else {
+        showNotification();
+      }
+    } else {
+      if (!wrongLetters.includes(letter)) {
+        wrongLetters.push(letter);
+
+        updateWrongLettersEl();
+      } else {
+        showNotification();
+      }
+    }
+  }
+});
